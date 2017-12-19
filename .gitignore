@@ -1,8 +1,10 @@
-# Byte-compiled / optimized / DLL files
+00# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
+.idea/
+manage.py
+*.py
 # C extensions
 *.so
 

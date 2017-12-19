@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form method="POST" action="/wangzhe.html" novalidate>
+        {% csrf_token %}
+        <p>
+            文章标题
+            {{ obj.title }}
+        </p>
+
+        <div>
+            <div>文章内容</div>
+            <div>
+                {{ obj.content }}
+            </div>
+        </div>
+        <input type="submit" value="提交" />
+    </form>
+    <script src="/static/kindeditor-4.1.10/kindeditor-all.js"></script>
+
+    <script>
+        KindEditor.create("#i1",{
+            width: "700px",
+            height: "300px",
+            resizeType:1,
+            uploadJson: '/upload_img.html',
+            extraFileUploadParams:{
+                "csrfmiddlewaretoken":"{{ csrf_token }}"
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .hide{
+            display: none;
+        }
+        .menu-body{
+            margin-left: 20px;
+        }
+        .menu-body a{
+            display: block;
+        }
+        .menu-body a.active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {{ menu_html|safe }}
+    <script src="/static/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+
+            $('.menu-header').click(function(){
+                $(this).next().removeClass('hide').parent().siblings().find('.menu-body').addClass('hide');
+
+            })
+
+        })
+    </script>
+</body>
+</html>

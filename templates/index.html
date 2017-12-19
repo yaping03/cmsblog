@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/commons.css" />
+</head>
+<body>
+<nav class="navbar navbar-default no-radius">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">老子的技术论坛</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        {% if type_id %}
+            <li><a href="/">全部</a></li>
+        {% else %}
+            <li class="active"><a href="/">全部</a></li>
+        {% endif %}
+
+          {% for item in type_choice_list %}
+                {% if item.0 == type_id %}
+                    <li class="active"><a href="/all/{{ item.0 }}/">{{ item.1 }}</a></li>
+                {% else %}
+                    <li><a href="/all/{{ item.0 }}/">{{ item.1 }}</a></li>
+                {% endif %}
+          {% endfor %}
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login/">登录</a></li>
+        <li><a href="#">注册</a></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div>
+    <div class="container">
+        <div class="col-md-8">
+
+            <div class="article-list">
+                <div class="article-item">
+                    <h3 class="art-head"><a>英杰大战黄鳝</a></h3>
+                    <div class="art-body clearfix">
+                        <a class="left"><img src="/static/imgs/yj.png"></a>
+                        近期一个项目需要用到低功耗蓝牙的开发，由于之前没有蓝牙开发的经验，发现网上关于蓝牙开发的资料不多，不是随便描述一下就是已经过时的，在此整理一篇低功耗蓝牙的入门资料，能够完成使用蓝牙的接受和发送数据。 低功耗蓝牙 (BLE，
+                    </div>
+                    <div class="art-footer">
+                        <a>
+                            <span class="glyphicon glyphicon-user"></span>
+                            张英杰
+                        </a>
+                    </div>
+                </div>
+
+                {% for article in article_list %}
+                    <div class="article-item">
+                        <h3 class="art-head"><a>{{ article.title }}</a></h3>
+                        <div class="art-body clearfix">
+
+                            <a class="left"><img src="{{ article.blog.user.avatar }}"></a>
+                            {{ article.summary }}
+                        </div>
+                        <div class="art-footer">
+                            <a>
+                                <span class="glyphicon glyphicon-user"></span>
+                                张英杰
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Panel heading without title</div>
+              <div class="panel-body">
+                    <p>sdf</p>
+                    <p>sdf</p>
+                    <p>sdf</p>
+                    <p>sdf</p>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">Panel heading without title</div>
+              <div class="panel-body">
+                    <p>sdf</p>
+                    <p>sdf</p>
+                    <p>sdf</p>
+                    <p>sdf</p>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

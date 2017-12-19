@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap.css" />
+    <style>
+        .login{
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 80px;
+        }
+        .f1{
+            position: absolute;height:80px;width: 80px;top:0;left: 0;opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h3>用户注册</h3>
+
+        <form class="form-horizontal" action="/register/" method="POST" enctype="multipart/form-data">
+            <h3>{{ obj.non_field_errors }}</h3>
+
+            {% csrf_token %}
+            <div style="position: relative;height:80px;width: 80px;">
+                <img id="previewImg" style="height:80px;width: 80px;" src="/static/imgs/default.png">
+
+                {{ obj.avatar }}
+            </div>
+
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    {{ obj.username }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                  {{ obj.password }}
+                </div>
+              </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-10">
+                  {{ obj.password2 }}
+                </div>
+              </div>
+                <div class="form-group">
+                <label class="col-sm-2 control-label">验证码</label>
+                <div class="col-sm-5">
+                  {{ obj.code }}
+                </div>
+                <div class="col-sm-5">
+                  <img onclick="changeCode(this);" style="width: 120px;height: 30px;" src="/check_code/" title="点击更新图片">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <input type="submit" class="btn btn-default" value="注册" />
+                </div>
+              </div>
+            </form>
+    </div>
+    <script src="/static/jquery-1.12.4.js"></script>
+    <script>
+        $(function(){
+           bindAvatar();
+        });
+
+        function changeCode(ths){
+            ths.src = ths.src + "?";
+        }
+
+        function bindAvatar(){
+            if(window.URL.createObjectURL){
+                bindAvatar2();
+            }else if(window.FileReader){
+                bindAvatar3()
+            }else{
+                bindAvatar1();
+            }
+        }
+
+        /*
+        Ajax上传
+         */
+        function bindAvatar1(){
+            $('#imgSelect').change(function(){
+                var obj = $(this)[0].files[0];
+                // Ajax发送后台，并获取路径
+                // img.src = 获取路径
+            })
+        }
+
+        /*
+        本地上传预览
+         */
+        function bindAvatar2(){
+            $('#imgSelect').change(function(){
+                var obj = $(this)[0].files[0];
+                // Ajax发送后台，并获取路径
+                // img.src = 获取路径
+                var v = window.URL.createObjectURL(obj);
+                $('#previewImg').attr('src',v);
+                $('#previewImg').load(function(){
+                    window.URL.revokeObjectURL(v);
+                });
+
+            })
+        }
+
+        function bindAvatar3(){
+            $('#imgSelect').change(function(){
+                var obj = $(this)[0].files[0];
+                // Ajax发送后台，并获取路径
+                // img.src = 获取路径
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#previewImg').attr('src',this.result);
+                };
+                reader.readAsDataURL(obj);
+            })
+        }
+
+    </script>
+</body>
+</html>

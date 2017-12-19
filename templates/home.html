@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/theme/{{ blog.theme }}.css" />
+</head>
+<body>
+    <div class="c1">
+        <div class="c11">{{ blog.user.nickname }}</div>
+        <div class="c12">{{ blog.title }}</div>
+    </div>
+    <div class="c2">
+        <h3>分类</h3>
+        <ul>
+            {% for item in category_list %}
+                <li>
+                    <a href="/{{ blog.site }}/category/{{ item.category_id }}/">{{ item.category__title }}({{ item.ct }})</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="c3">
+        <h3>标签</h3>
+        <ul>
+            {% for item in tag_list %}
+                <li>
+                    <a href="/{{ blog.site }}/tag/{{ item.tag_id }}/">{{ item.tag__title }}({{ item.ct }})</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h3>时间</h3>
+        <ul>
+            {% for item in date_list %}
+                <li>
+                    <a href="/{{ blog.site }}/date/{{ item.ctime }}/">{{ item.ctime }}({{ item.ct }})</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="c4">
+        {% for row in article_list %}
+            <div>
+                <a href="/{{ blog.site }}/{{ row.nid }}.html">{{ row.title }}</a>
+                <div>{{ row.summary }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

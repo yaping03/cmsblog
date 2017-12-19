@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .condition a{
+            display: inline-block;
+            padding: 5px;
+        }
+        .condition a.active{
+            background-color: #204d74;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h3>筛选</h3>
+    <div class="condition">
+        大大分类：
+        {% if kwargs.article_type_id == 0 %}
+            <a class="active" href="/lizhi-0-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">全部</a>
+        {% else %}
+            <a href="/lizhi-0-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">全部</a>
+        {% endif %}
+        {% for row in type_list %}
+            {% if row.0 == kwargs.article_type_id %}
+                <a class="active" href="/lizhi-{{ row.0 }}-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">{{ row.1 }}</a>
+            {% else %}
+                <a  href="/lizhi-{{ row.0 }}-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">{{ row.1 }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div  class="condition">
+        个人分类：
+        <a href="#">全部</a>
+        {% for row in category_list %}
+            <a href="{{ row.nid }}">{{ row.title }}</a>
+        {% endfor %}
+    </div>
+    <div  class="condition">
+        个人标签：
+        <a href="#">全部</a>
+        {% for row in tag_list %}
+            <a href="{{ row.nid }}">{{ row.title }}</a>
+        {% endfor %}
+    </div>
+
+
+    <h3>结果</h3>
+    {% for row in article_list %}
+        <div>
+            <h4><a href="#">{{ row.title }}</a></h4>
+            <div>{{ row.summary }}</div>
+        </div>
+    {% endfor %}
+</body>
+</html>
